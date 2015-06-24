@@ -25,7 +25,7 @@ def sundaram(limit):
                 break
     return all
 
-upper_limit = 1000
+upper_limit = 1000000
 primes = [2]
 circ_primes = []
 
@@ -40,12 +40,21 @@ del list
 print(" done")
 
 # Test circular primes
+print("Testing circular primes below " + str(upper_limit))
 for prime in primes:
     if (len(str(prime)) == 1):
         circ_primes.append(prime)
     else:
         for steps in range(1, len(str(prime))):
-            print(prime, steps)
+            # Rotate and check if prime
+            ps = str(prime)
+            test = int(ps[steps:] + ps[:steps])
+            if test not in primes:
+                break
+            elif (steps == (len(str(prime)) - 1)):
+                circ_primes.append(prime)
 
-print(primes)
-print(circ_primes)
+# print(primes)
+# print(circ_primes)
+
+print("Circular primes below " + str(upper_limit) + " : " + str(len(circ_primes)))
